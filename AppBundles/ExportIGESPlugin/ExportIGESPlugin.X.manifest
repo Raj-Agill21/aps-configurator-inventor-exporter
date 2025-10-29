@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+  <assemblyIdentity name="ExportIGESPlugin" version="1.0.0.0"></assemblyIdentity>
+  <clrClass clsid="{e6b2d3c4-a5f6-47e8-b9c0-1d2e3f4a5b6c}" progid="ExportIGESPlugin.PluginServer" threadingModel="Both" name="ExportIGESPlugin.PluginServer"></clrClass>
+  <file name="ExportIGESPlugin.dll" hashalg="SHA1"></file>
+</assembly>
+

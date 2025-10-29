@@ -220,3 +220,10 @@ We are using npm.
 ### Embedded mode
 You can read about embedded mode [here](EMBEDDED-README.md)
 	
+---
+
+### Acknowledgment
+
+This project is based on Autodesk’s open-source repository [aps-configurator-inventor](https://github.com/autodesk-platform-services/aps-configurator-inventor) licensed under the MIT License.
+
+Additional functionalities and enhancements have been developed by [Raj Agill](https://github.com/Raj-Agill21).

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+  <assemblyIdentity name="ExportSTEPPlugin" version="1.0.0.0"></assemblyIdentity>
+  <clrClass clsid="{f5a3c1e0-8b1d-4e5f-9a2c-3d4e5f6a7b8c}" progid="ExportSTEPPlugin.PluginServer" threadingModel="Both" name="ExportSTEPPlugin.PluginServer"></clrClass>
+  <file name="ExportSTEPPlugin.dll" hashalg="SHA1"></file>
+</assembly>
+

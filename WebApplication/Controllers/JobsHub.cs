@@ -183,6 +183,50 @@ namespace WebApplication.Controllers
             await RunJobAsync(job);
         }
 
+        public async Task CreateStepExportJob(string projectId, string hash, string code)
+        {
+            _logger.LogInformation($"invoked CreateStepExportJob, connectionId : {Context.ConnectionId}");
+
+            _profileProvider.Code = code;
+
+            // create job and run it
+            var job = new StepExportJobItem(_logger, projectId, hash, _projectWork, _linkGenerator);
+            await RunJobAsync(job);
+        }
+
+        public async Task CreateIgesExportJob(string projectId, string hash, string code)
+        {
+            _logger.LogInformation($"invoked CreateIgesExportJob, connectionId : {Context.ConnectionId}");
+
+            _profileProvider.Code = code;
+
+            // create job and run it
+            var job = new IgesExportJobItem(_logger, projectId, hash, _projectWork, _linkGenerator);
+            await RunJobAsync(job);
+        }
+
+        public async Task CreateDwgExportJob(string projectId, string hash, string code)
+        {
+            _logger.LogInformation($"invoked CreateDwgExportJob, connectionId : {Context.ConnectionId}");
+
+            _profileProvider.Code = code;
+
+            // create job and run it
+            var job = new DwgExportJobItem(_logger, projectId, hash, _projectWork, _linkGenerator);
+            await RunJobAsync(job);
+        }
+
+        public async Task CreateStlExportJob(string projectId, string hash, string code)
+        {
+            _logger.LogInformation($"invoked CreateStlExportJob, connectionId : {Context.ConnectionId}");
+
+            _profileProvider.Code = code;
+
+            // create job and run it
+            var job = new StlExportJobItem(_logger, projectId, hash, _projectWork, _linkGenerator);
+            await RunJobAsync(job);
+        }
+
         public async Task CreateAdoptProjectWithParametersJob(string payloadUrl, string code = null)
         {
             if (!_configuration.GetValue<bool>("embedded"))

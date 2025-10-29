@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Addin Type="Plugin">
+  <ClassId>{d7c3e4f5-b6a7-48e9-bad1-2e3f4a5b6c7d}</ClassId>
+  <ClientId>{d7c3e4f5-b6a7-48e9-bad1-2e3f4a5b6c7d}</ClientId>
+  <ClassName>ExportDWGPlugin.PluginServer</ClassName>
+  <Description>Export to DWG format using Design Automation</Description>
+  <Assembly>ExportDWGPlugin.dll</Assembly>
+  <SupportedSoftwareVersionGreaterThan>26..</SupportedSoftwareVersionGreaterThan>
+  <DataVersion>1</DataVersion>
+  <UserUnloadable>true</UserUnloadable>
+  <Hidden>false</Hidden>
+  <LoadOnStartup>false</LoadOnStartup>
+  <SupportedRuntimeVersion>8.0</SupportedRuntimeVersion>
+</Addin>
+

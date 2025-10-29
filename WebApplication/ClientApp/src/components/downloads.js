@@ -149,6 +149,43 @@ export class Downloads extends Component {
                         clickHandler: async () => this.props.getDownloadLink('CreateDrawingDownloadJob', project.id, project.hash, 'Preparing Drawings')
                     });
             }
+
+            // CAD Export Formats
+            data.push({
+                id: 'step',
+                icon: 'products-and-services-24.svg',
+                type: 'STEP',
+                env: 'Model',
+                link: deadEndLink('STEP'),
+                clickHandler: async () => this.props.getDownloadLink('CreateStepExportJob', project.id, project.hash, 'Exporting to STEP')
+            });
+
+            data.push({
+                id: 'iges',
+                icon: 'products-and-services-24.svg',
+                type: 'IGES',
+                env: 'Model',
+                link: deadEndLink('IGES'),
+                clickHandler: async () => this.props.getDownloadLink('CreateIgesExportJob', project.id, project.hash, 'Exporting to IGES')
+            });
+
+            data.push({
+                id: 'dwg',
+                icon: 'products-and-services-24.svg',
+                type: 'DWG',
+                env: 'Model',
+                link: deadEndLink('DWG'),
+                clickHandler: async () => this.props.getDownloadLink('CreateDwgExportJob', project.id, project.hash, 'Exporting to DWG')
+            });
+
+            data.push({
+                id: 'stl',
+                icon: 'products-and-services-24.svg',
+                type: 'STL',
+                env: 'Model',
+                link: deadEndLink('STL'),
+                clickHandler: async () => this.props.getDownloadLink('CreateStlExportJob', project.id, project.hash, 'Exporting to STL')
+            });
         }
 
         return (

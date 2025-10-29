@@ -46,6 +46,10 @@ namespace WebApplication.Definitions
         public string BomUrl { get; set; }
         public string DrawingUrl { get; set; }
         public string DrawingPdfUrl { get; set; }
+        public string StepUrl { get; internal set; }
+        public string IgesUrl { get; internal set; }
+        public string DwgUrl { get; internal set; }
+        public string StlUrl { get; internal set; }
     }
 
     /// <summary>

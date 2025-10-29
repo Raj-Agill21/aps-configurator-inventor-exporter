@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+  <assemblyIdentity name="ExportDWGPlugin" version="1.0.0.0"></assemblyIdentity>
+  <clrClass clsid="{d7c3e4f5-b6a7-48e9-bad1-2e3f4a5b6c7d}" progid="ExportDWGPlugin.PluginServer" threadingModel="Both" name="ExportDWGPlugin.PluginServer"></clrClass>
+  <file name="ExportDWGPlugin.dll" hashalg="SHA1"></file>
+</assembly>
+

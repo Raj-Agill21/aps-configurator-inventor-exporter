@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ApplicationPackage SchemaVersion="1.0" Version="1.0" ProductCode="{f5a3c1e0-8b1d-4e5f-9a2c-3d4e5f6a7b8c}" Name="ExportSTEPPlugin" Description="Export Inventor documents to STEP format" Author="Inventor IO Dev">
+	<CompanyDetails Name="Autodesk, Inc" Phone="415.555.5555" Url="www.autodesk.com" Email="noreply@autodesk.com" />
+	<Components>
+		<RuntimeRequirements  OS="Win64" Platform="Inventor" />
+		<ComponentEntry LoadOnAutoCADStartup="False" LoadOnCommandInvocation="False"
+			AppDescription="ExportSTEPPlugin App Package."
+			ModuleName="./Contents/ExportSTEPPlugin.Inventor.addin" AppName="ExportSTEPPlugin"/>
+	</Components>
+	<EnvironmentVariables>
+	</EnvironmentVariables>
+</ApplicationPackage>
+

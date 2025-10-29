@@ -28,6 +28,10 @@ namespace WebApplication.Processing
         private readonly CreateRFA _rfaWork;
         private readonly ExportDrawing _exportDrawingWork;
         private readonly UpdateDrawings _updateDrawingsWork;
+        private readonly ExportSTEP _exportStepWork;
+        private readonly ExportIGES _exportIgesWork;
+        private readonly ExportDWG _exportDwgWork;
+        private readonly ExportSTL _exportStlWork;
         private readonly AdoptProject _adoptWork;
         private readonly UpdateProject _updateProjectWork;
         private readonly AppBundleZipPaths _paths;
@@ -39,6 +43,10 @@ namespace WebApplication.Processing
             _rfaWork = new CreateRFA(publisher);
             _exportDrawingWork = new ExportDrawing(publisher);
             _updateDrawingsWork = new UpdateDrawings(publisher);
+            _exportStepWork = new ExportSTEP(publisher);
+            _exportIgesWork = new ExportIGES(publisher);
+            _exportDwgWork = new ExportDWG(publisher);
+            _exportStlWork = new ExportSTL(publisher);
             _adoptWork = new AdoptProject(publisher);
             _updateProjectWork = new UpdateProject(publisher);
             _paths = appBundleZipPathsOptionsAccessor.Value;
@@ -60,6 +68,10 @@ namespace WebApplication.Processing
             await _rfaWork.InitializeAsync(_paths.CreateRFA);
             await _exportDrawingWork.InitializeAsync(_paths.ExportDrawing);
             await _updateDrawingsWork.InitializeAsync(_paths.UpdateDrawings);
+            await _exportStepWork.InitializeAsync(_paths.ExportSTEP);
+            await _exportIgesWork.InitializeAsync(_paths.ExportIGES);
+            await _exportDwgWork.InitializeAsync(_paths.ExportDWG);
+            await _exportStlWork.InitializeAsync(_paths.ExportSTL);
 
             await _adoptWork.InitializeAsync(null /* does not matter */);
             await _updateProjectWork.InitializeAsync(null /* does not matter */);
@@ -80,6 +92,10 @@ namespace WebApplication.Processing
             await _rfaWork.CleanUpAsync();
             await _exportDrawingWork.CleanUpAsync();
             await _updateDrawingsWork.CleanUpAsync();
+            await _exportStepWork.CleanUpAsync();
+            await _exportIgesWork.CleanUpAsync();
+            await _exportDwgWork.CleanUpAsync();
+            await _exportStlWork.CleanUpAsync();
 
             await _adoptWork.CleanUpAsync();
             await _updateProjectWork.CleanUpAsync();
@@ -125,6 +141,46 @@ namespace WebApplication.Processing
         internal async Task<ProcessingResult> ExportDrawingAsync(ProcessingArgs drawingData)
         {
             return await _exportDrawingWork.ProcessAsync(drawingData);
+        }
+
+        internal async Task<ProcessingResult> GenerateStepAsync(ProcessingArgs stepData)
+        {
+            ProcessingResult result = await _exportStepWork.ProcessAsync(stepData);
+            if (!result.Success)
+            {
+                result.ErrorMessage = "Failed to generate STEP file";
+            }
+            return result;
+        }
+
+        internal async Task<ProcessingResult> GenerateIgesAsync(ProcessingArgs igesData)
+        {
+            ProcessingResult result = await _exportIgesWork.ProcessAsync(igesData);
+            if (!result.Success)
+            {
+                result.ErrorMessage = "Failed to generate IGES file";
+            }
+            return result;
+        }
+
+        internal async Task<ProcessingResult> GenerateDwgAsync(ProcessingArgs dwgData)
+        {
+            ProcessingResult result = await _exportDwgWork.ProcessAsync(dwgData);
+            if (!result.Success)
+            {
+                result.ErrorMessage = "Failed to generate DWG file";
+            }
+            return result;
+        }
+
+        internal async Task<ProcessingResult> GenerateStlAsync(ProcessingArgs stlData)
+        {
+            ProcessingResult result = await _exportStlWork.ProcessAsync(stlData);
+            if (!result.Success)
+            {
+                result.ErrorMessage = "Failed to generate STL file";
+            }
+            return result;
         }
     }
 }

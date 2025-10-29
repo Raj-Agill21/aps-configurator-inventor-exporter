@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Addin Type="Plugin">
+  <ClassId>{e6b2d3c4-a5f6-47e8-b9c0-1d2e3f4a5b6c}</ClassId>
+  <ClientId>{e6b2d3c4-a5f6-47e8-b9c0-1d2e3f4a5b6c}</ClientId>
+  <ClassName>ExportIGESPlugin.PluginServer</ClassName>
+  <Description>Export to IGES format using Design Automation</Description>
+  <Assembly>ExportIGESPlugin.dll</Assembly>
+  <SupportedSoftwareVersionGreaterThan>26..</SupportedSoftwareVersionGreaterThan>
+  <DataVersion>1</DataVersion>
+  <UserUnloadable>true</UserUnloadable>
+  <Hidden>false</Hidden>
+  <LoadOnStartup>false</LoadOnStartup>
+  <SupportedRuntimeVersion>8.0</SupportedRuntimeVersion>
+</Addin>
+

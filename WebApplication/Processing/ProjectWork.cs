@@ -306,6 +306,150 @@ namespace WebApplication.Processing
         }
 
         /// <summary>
+        /// Generate STEP file (or take it from cache).
+        /// </summary>
+        public async Task<(FdaStatsDTO stats, string reportUrl)> GenerateStepAsync(string projectName, string hash)
+        {
+            _logger.LogInformation($"Generating STEP for hash {hash}");
+
+            ProjectStorage storage = await _userResolver.GetProjectStorageAsync(projectName);
+            Project project = storage.Project;
+
+            var ossNames = project.OssNameProvider(hash);
+
+            var bucket = await _userResolver.GetBucketAsync();
+            // check if STEP file is already generated
+            if (await bucket.ObjectExistsAsync(ossNames.Step))
+            {
+                var stats = await bucket.DeserializeAsync<Statistics[]>(ossNames.StatsStep);
+                return (FdaStatsDTO.CreditsOnly(stats), null);
+            }
+
+            // OK, nothing in cache - generate it now
+            var inputDocUrl = await bucket.CreateSignedUrlAsync(ossNames.GetCurrentModel(storage.IsAssembly));
+            ProcessingArgs stepData = await _arranger.ForStepAsync(inputDocUrl, storage.Metadata.TLA);
+
+            ProcessingResult result = await _fdaClient.GenerateStepAsync(stepData);
+            if (!result.Success)
+            {
+                _logger.LogError($"{result.ErrorMessage} for project {project.Name} and hash {hash}");
+                throw new FdaProcessingException($"{result.ErrorMessage} for project {project.Name} and hash {hash}", result.ReportUrl);
+            }
+
+            await _arranger.MoveStepAsync(project, hash);
+            await bucket.UploadAsJsonAsync(ossNames.StatsStep, result.Stats);
+            return (FdaStatsDTO.All(result.Stats), result.ReportUrl);
+        }
+
+        /// <summary>
+        /// Generate IGES file (or take it from cache).
+        /// </summary>
+        public async Task<(FdaStatsDTO stats, string reportUrl)> GenerateIgesAsync(string projectName, string hash)
+        {
+            _logger.LogInformation($"Generating IGES for hash {hash}");
+
+            ProjectStorage storage = await _userResolver.GetProjectStorageAsync(projectName);
+            Project project = storage.Project;
+
+            var ossNames = project.OssNameProvider(hash);
+
+            var bucket = await _userResolver.GetBucketAsync();
+            // check if IGES file is already generated
+            if (await bucket.ObjectExistsAsync(ossNames.Iges))
+            {
+                var stats = await bucket.DeserializeAsync<Statistics[]>(ossNames.StatsIges);
+                return (FdaStatsDTO.CreditsOnly(stats), null);
+            }
+
+            // OK, nothing in cache - generate it now
+            var inputDocUrl = await bucket.CreateSignedUrlAsync(ossNames.GetCurrentModel(storage.IsAssembly));
+            ProcessingArgs igesData = await _arranger.ForIgesAsync(inputDocUrl, storage.Metadata.TLA);
+
+            ProcessingResult result = await _fdaClient.GenerateIgesAsync(igesData);
+            if (!result.Success)
+            {
+                _logger.LogError($"{result.ErrorMessage} for project {project.Name} and hash {hash}");
+                throw new FdaProcessingException($"{result.ErrorMessage} for project {project.Name} and hash {hash}", result.ReportUrl);
+            }
+
+            await _arranger.MoveIgesAsync(project, hash);
+            await bucket.UploadAsJsonAsync(ossNames.StatsIges, result.Stats);
+            return (FdaStatsDTO.All(result.Stats), result.ReportUrl);
+        }
+
+        /// <summary>
+        /// Generate DWG file (or take it from cache).
+        /// </summary>
+        public async Task<(FdaStatsDTO stats, string reportUrl)> GenerateDwgAsync(string projectName, string hash)
+        {
+            _logger.LogInformation($"Generating DWG for hash {hash}");
+
+            ProjectStorage storage = await _userResolver.GetProjectStorageAsync(projectName);
+            Project project = storage.Project;
+
+            var ossNames = project.OssNameProvider(hash);
+
+            var bucket = await _userResolver.GetBucketAsync();
+            // check if DWG file is already generated
+            if (await bucket.ObjectExistsAsync(ossNames.Dwg))
+            {
+                var stats = await bucket.DeserializeAsync<Statistics[]>(ossNames.StatsDwg);
+                return (FdaStatsDTO.CreditsOnly(stats), null);
+            }
+
+            // OK, nothing in cache - generate it now
+            var inputDocUrl = await bucket.CreateSignedUrlAsync(ossNames.GetCurrentModel(storage.IsAssembly));
+            ProcessingArgs dwgData = await _arranger.ForDwgAsync(inputDocUrl, storage.Metadata.TLA);
+
+            ProcessingResult result = await _fdaClient.GenerateDwgAsync(dwgData);
+            if (!result.Success)
+            {
+                _logger.LogError($"{result.ErrorMessage} for project {project.Name} and hash {hash}");
+                throw new FdaProcessingException($"{result.ErrorMessage} for project {project.Name} and hash {hash}", result.ReportUrl);
+            }
+
+            await _arranger.MoveDwgAsync(project, hash);
+            await bucket.UploadAsJsonAsync(ossNames.StatsDwg, result.Stats);
+            return (FdaStatsDTO.All(result.Stats), result.ReportUrl);
+        }
+
+        /// <summary>
+        /// Generate STL file (or take it from cache).
+        /// </summary>
+        public async Task<(FdaStatsDTO stats, string reportUrl)> GenerateStlAsync(string projectName, string hash)
+        {
+            _logger.LogInformation($"Generating STL for hash {hash}");
+
+            ProjectStorage storage = await _userResolver.GetProjectStorageAsync(projectName);
+            Project project = storage.Project;
+
+            var ossNames = project.OssNameProvider(hash);
+
+            var bucket = await _userResolver.GetBucketAsync();
+            // check if STL file is already generated
+            if (await bucket.ObjectExistsAsync(ossNames.Stl))
+            {
+                var stats = await bucket.DeserializeAsync<Statistics[]>(ossNames.StatsStl);
+                return (FdaStatsDTO.CreditsOnly(stats), null);
+            }
+
+            // OK, nothing in cache - generate it now
+            var inputDocUrl = await bucket.CreateSignedUrlAsync(ossNames.GetCurrentModel(storage.IsAssembly));
+            ProcessingArgs stlData = await _arranger.ForStlAsync(inputDocUrl, storage.Metadata.TLA);
+
+            ProcessingResult result = await _fdaClient.GenerateStlAsync(stlData);
+            if (!result.Success)
+            {
+                _logger.LogError($"{result.ErrorMessage} for project {project.Name} and hash {hash}");
+                throw new FdaProcessingException($"{result.ErrorMessage} for project {project.Name} and hash {hash}", result.ReportUrl);
+            }
+
+            await _arranger.MoveStlAsync(project, hash);
+            await bucket.UploadAsJsonAsync(ossNames.StatsStl, result.Stats);
+            return (FdaStatsDTO.All(result.Stats), result.ReportUrl);
+        }
+
+        /// <summary>
         /// Generate project data for the given parameters and cache results locally.
         /// </summary>
         /// <returns>Resulting parameters hash</returns>

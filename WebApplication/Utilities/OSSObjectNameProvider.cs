@@ -79,6 +79,10 @@ namespace WebApplication.Utilities
             public const string RFA = "stats.rfa.json";
             public static string DrawingPDF(int index) => $"stats.drawing_{index}.pdf.json";
             public const string Drawings = "stats.drawing.zip.json";
+            public const string STEP = "stats.step.json";
+            public const string IGES = "stats.iges.json";
+            public const string DWG = "stats.dwg.json";
+            public const string STL = "stats.stl.json";
         }
     }
 
@@ -220,11 +224,20 @@ namespace WebApplication.Utilities
         /// </summary>
         public string DrawingPdf(int idx) => ToFullName(LocalName.DrawingPdf(idx));
 
+        public string Step => ToFullName("model.step");
+        public string Iges => ToFullName("model.iges");
+        public string Dwg => ToFullName("model.dwg");
+        public string Stl => ToFullName("model.stl");
+
         public string StatsAdopt => ToFullName(LocalName.Stats.Adopt);
         public string StatsUpdate => ToFullName(LocalName.Stats.Update);
         public string StatsRFA => ToFullName(LocalName.Stats.RFA);
         public string StatsDrawingPDF(int index) => ToFullName(LocalName.Stats.DrawingPDF(index));
         public string StatsDrawings => ToFullName(LocalName.Stats.Drawings);
+        public string StatsStep => ToFullName(LocalName.Stats.STEP);
+        public string StatsIges => ToFullName(LocalName.Stats.IGES);
+        public string StatsDwg => ToFullName(LocalName.Stats.DWG);
+        public string StatsStl => ToFullName(LocalName.Stats.STL);
     }
 
     /// <summary>

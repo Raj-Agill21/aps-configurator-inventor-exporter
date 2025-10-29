@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ApplicationPackage SchemaVersion="1.0" Version="1.0" ProductCode="{d7c3e4f5-b6a7-48e9-bad1-2e3f4a5b6c7d}" Name="ExportDWGPlugin" Description="Export Inventor documents to DWG format" Author="Inventor IO Dev">
+	<CompanyDetails Name="Autodesk, Inc" Phone="415.555.5555" Url="www.autodesk.com" Email="noreply@autodesk.com" />
+	<Components>
+		<RuntimeRequirements  OS="Win64" Platform="Inventor" />
+		<ComponentEntry LoadOnAutoCADStartup="False" LoadOnCommandInvocation="False"
+			AppDescription="ExportDWGPlugin App Package."
+			ModuleName="./Contents/ExportDWGPlugin.Inventor.addin" AppName="ExportDWGPlugin"/>
+	</Components>
+	<EnvironmentVariables>
+	</EnvironmentVariables>
+</ApplicationPackage>
+

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Addin Type="Plugin">
+  <ClassId>{c8d4f5e6-b7a8-49fa-cbd2-3f4a5b6c7d8e}</ClassId>
+  <ClientId>{c8d4f5e6-b7a8-49fa-cbd2-3f4a5b6c7d8e}</ClientId>
+  <ClassName>ExportSTLPlugin.PluginServer</ClassName>
+  <Description>Export to STL format using Design Automation</Description>
+  <Assembly>ExportSTLPlugin.dll</Assembly>
+  <SupportedSoftwareVersionGreaterThan>26..</SupportedSoftwareVersionGreaterThan>
+  <DataVersion>1</DataVersion>
+  <UserUnloadable>true</UserUnloadable>
+  <Hidden>false</Hidden>
+  <LoadOnStartup>false</LoadOnStartup>
+  <SupportedRuntimeVersion>8.0</SupportedRuntimeVersion>
+</Addin>
+

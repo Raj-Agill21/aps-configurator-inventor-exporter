@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<assembly xmlns="urn:schemas-microsoft-com:asm.v1" manifestVersion="1.0">
+  <assemblyIdentity name="ExportSTLPlugin" version="1.0.0.0"></assemblyIdentity>
+  <clrClass clsid="{c8d4f5e6-b7a8-49fa-cbd2-3f4a5b6c7d8e}" progid="ExportSTLPlugin.PluginServer" threadingModel="Both" name="ExportSTLPlugin.PluginServer"></clrClass>
+  <file name="ExportSTLPlugin.dll" hashalg="SHA1"></file>
+</assembly>
+

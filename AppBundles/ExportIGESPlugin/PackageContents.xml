@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ApplicationPackage SchemaVersion="1.0" Version="1.0" ProductCode="{e6b2d3c4-a5f6-47e8-b9c0-1d2e3f4a5b6c}" Name="ExportIGESPlugin" Description="Export Inventor documents to IGES format" Author="Inventor IO Dev">
+	<CompanyDetails Name="Autodesk, Inc" Phone="415.555.5555" Url="www.autodesk.com" Email="noreply@autodesk.com" />
+	<Components>
+		<RuntimeRequirements  OS="Win64" Platform="Inventor" />
+		<ComponentEntry LoadOnAutoCADStartup="False" LoadOnCommandInvocation="False"
+			AppDescription="ExportIGESPlugin App Package."
+			ModuleName="./Contents/ExportIGESPlugin.Inventor.addin" AppName="ExportIGESPlugin"/>
+	</Components>
+	<EnvironmentVariables>
+	</EnvironmentVariables>
+</ApplicationPackage>
+

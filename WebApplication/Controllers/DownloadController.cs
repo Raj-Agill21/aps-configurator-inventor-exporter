@@ -86,6 +86,30 @@ namespace WebApplication.Controllers
             return RedirectToOssObject(projectName, hash, (ossNames, _) => ossNames.Drawing);
         }
 
+        [HttpGet("{projectName}/{hash}/step/{code?}")]
+        public Task<RedirectResult> STEP(string projectName, string hash, string code = null)
+        {
+            return RedirectToOssObject(projectName, hash, (ossNames, _) => ossNames.Step);
+        }
+
+        [HttpGet("{projectName}/{hash}/iges/{code?}")]
+        public Task<RedirectResult> IGES(string projectName, string hash, string code = null)
+        {
+            return RedirectToOssObject(projectName, hash, (ossNames, _) => ossNames.Iges);
+        }
+
+        [HttpGet("{projectName}/{hash}/dwg/{code?}")]
+        public Task<RedirectResult> DWG(string projectName, string hash, string code = null)
+        {
+            return RedirectToOssObject(projectName, hash, (ossNames, _) => ossNames.Dwg);
+        }
+
+        [HttpGet("{projectName}/{hash}/stl/{code?}")]
+        public Task<RedirectResult> STL(string projectName, string hash, string code = null)
+        {
+            return RedirectToOssObject(projectName, hash, (ossNames, _) => ossNames.Stl);
+        }
+
         private async Task<RedirectResult> RedirectToOssObject(string projectName, string hash, Func<OSSObjectNameProvider, bool, string> nameExtractor)
         {
             ProjectStorage projectStorage = await _userResolver.GetProjectStorageAsync(projectName);

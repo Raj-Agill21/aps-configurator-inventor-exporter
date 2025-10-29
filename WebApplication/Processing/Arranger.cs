@@ -53,6 +53,10 @@ namespace WebApplication.Processing
         public readonly string OutputDrawingPdf = Unique(".drawing.pdf");
         public readonly string DrawingsList = Unique(".drawings-list.json");
         public readonly string AdoptMessages = Unique(".adopt-messages.json");
+        public readonly string OutputSTEP = Unique(".output.step");
+        public readonly string OutputIGES = Unique(".output.iges");
+        public readonly string OutputDWG = Unique(".output.dwg");
+        public readonly string OutputSTL = Unique(".output.stl");
 
         /// <summary>
         /// Constructor.
@@ -189,6 +193,34 @@ namespace WebApplication.Processing
             await bucket.RenameObjectAsync(OutputDrawing, ossNames.Drawing, true);
         }
 
+        internal async Task MoveStepAsync(Project project, string hash)
+        {
+            var bucket = await _userResolver.GetBucketAsync();
+            var ossNames = project.OssNameProvider(hash);
+            await bucket.RenameObjectAsync(OutputSTEP, ossNames.Step, true);
+        }
+
+        internal async Task MoveIgesAsync(Project project, string hash)
+        {
+            var bucket = await _userResolver.GetBucketAsync();
+            var ossNames = project.OssNameProvider(hash);
+            await bucket.RenameObjectAsync(OutputIGES, ossNames.Iges, true);
+        }
+
+        internal async Task MoveDwgAsync(Project project, string hash)
+        {
+            var bucket = await _userResolver.GetBucketAsync();
+            var ossNames = project.OssNameProvider(hash);
+            await bucket.RenameObjectAsync(OutputDWG, ossNames.Dwg, true);
+        }
+
+        internal async Task MoveStlAsync(Project project, string hash)
+        {
+            var bucket = await _userResolver.GetBucketAsync();
+            var ossNames = project.OssNameProvider(hash);
+            await bucket.RenameObjectAsync(OutputSTL, ossNames.Stl, true);
+        }
+
         internal async Task<ProcessingArgs> ForDrawingAsync(string inputDocUrl, string topLevelAssembly)
         {
             var bucket = await _userResolver.GetBucketAsync();
@@ -226,6 +258,58 @@ namespace WebApplication.Processing
                 DrawingToGenerate = drawingKey,
                 DrawingPdfUrl = drawingPdfUrl,
                 TLA = topLevelAssembly
+            };
+        }
+
+        internal async Task<ProcessingArgs> ForStepAsync(string inputDocUrl, string topLevelAssembly)
+        {
+            var bucket = await _userResolver.GetBucketAsync();
+            var stepUrl = await bucket.CreateSignedUrlAsync(OutputSTEP, Access.Write);
+
+            return new ProcessingArgs
+            {
+                InputDocUrl = inputDocUrl,
+                TLA = topLevelAssembly,
+                StepUrl = stepUrl
+            };
+        }
+
+        internal async Task<ProcessingArgs> ForIgesAsync(string inputDocUrl, string topLevelAssembly)
+        {
+            var bucket = await _userResolver.GetBucketAsync();
+            var igesUrl = await bucket.CreateSignedUrlAsync(OutputIGES, Access.Write);
+
+            return new ProcessingArgs
+            {
+                InputDocUrl = inputDocUrl,
+                TLA = topLevelAssembly,
+                IgesUrl = igesUrl
+            };
+        }
+
+        internal async Task<ProcessingArgs> ForDwgAsync(string inputDocUrl, string topLevelAssembly)
+        {
+            var bucket = await _userResolver.GetBucketAsync();
+            var dwgUrl = await bucket.CreateSignedUrlAsync(OutputDWG, Access.Write);
+
+            return new ProcessingArgs
+            {
+                InputDocUrl = inputDocUrl,
+                TLA = topLevelAssembly,
+                DwgUrl = dwgUrl
+            };
+        }
+
+        internal async Task<ProcessingArgs> ForStlAsync(string inputDocUrl, string topLevelAssembly)
+        {
+            var bucket = await _userResolver.GetBucketAsync();
+            var stlUrl = await bucket.CreateSignedUrlAsync(OutputSTL, Access.Write);
+
+            return new ProcessingArgs
+            {
+                InputDocUrl = inputDocUrl,
+                TLA = topLevelAssembly,
+                StlUrl = stlUrl
             };
         }
 
